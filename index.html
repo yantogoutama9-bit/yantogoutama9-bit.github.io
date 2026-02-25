@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MailHub - Email Client Gratis</title>
+    <title>MailHub - Email Client</title>
     <style>
         * {
             margin: 0;
@@ -23,15 +23,6 @@
             --danger: #ef4444;
             --success: #10b981;
             --warning: #f59e0b;
-        }
-
-        [data-theme="dark"] {
-            --bg: #111827;
-            --surface: #1f2937;
-            --text: #f9fafb;
-            --text-secondary: #9ca3af;
-            --border: #374151;
-            --hover: #374151;
         }
 
         body {
@@ -60,110 +51,67 @@
 
         .setup-container {
             width: 100%;
-            max-width: 600px;
+            max-width: 500px;
         }
 
         .setup-box {
             background: var(--surface);
-            padding: 40px;
+            padding: 32px;
             border-radius: 20px;
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
-            margin-bottom: 20px;
         }
 
         .setup-logo {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
         }
 
         .setup-logo h1 {
-            font-size: 32px;
+            font-size: 28px;
             color: var(--primary);
             margin-bottom: 8px;
         }
 
         .setup-logo p {
             color: var(--text-secondary);
+            font-size: 14px;
         }
 
-        .alert-box {
-            background: #fef3c7;
-            border: 1px solid #f59e0b;
+        .info-box {
+            background: #dbeafe;
+            border: 1px solid #3b82f6;
             border-radius: 12px;
             padding: 16px;
-            margin-bottom: 24px;
-            font-size: 14px;
-            color: #92400e;
-        }
-
-        .alert-box strong {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .steps {
-            background: var(--bg);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 24px;
-        }
-
-        .step {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 16px;
-            align-items: flex-start;
-        }
-
-        .step:last-child {
-            margin-bottom: 0;
-        }
-
-        .step-num {
-            width: 28px;
-            height: 28px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-
-        .step-content h4 {
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
-
-        .step-content p {
+            margin-bottom: 20px;
             font-size: 13px;
-            color: var(--text-secondary);
+            color: #1e40af;
+        }
+
+        .info-box strong {
+            display: block;
+            margin-bottom: 6px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .form-group label {
             display: block;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: var(--text);
         }
 
         .form-group input {
             width: 100%;
-            padding: 12px 16px;
+            padding: 12px;
             border: 2px solid var(--border);
             border-radius: 10px;
             font-size: 14px;
             background: var(--bg);
             color: var(--text);
-            transition: all 0.3s;
         }
 
         .form-group input:focus {
@@ -171,11 +119,15 @@
             border-color: var(--primary);
         }
 
-        .form-group small {
-            display: block;
-            margin-top: 6px;
-            font-size: 12px;
-            color: var(--text-secondary);
+        .email-preview {
+            background: var(--bg);
+            padding: 12px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 14px;
+            color: var(--primary);
+            margin-top: 8px;
+            word-break: break-all;
         }
 
         .btn {
@@ -183,14 +135,10 @@
             padding: 14px;
             border: none;
             border-radius: 10px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
         }
 
         .btn-primary {
@@ -200,13 +148,6 @@
 
         .btn-primary:hover {
             background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: var(--bg);
-            color: var(--text);
-            border: 2px solid var(--border);
         }
 
         .hidden {
@@ -225,7 +166,7 @@
 
         /* Sidebar */
         .sidebar {
-            width: 300px;
+            width: 280px;
             background: var(--surface);
             border-right: 1px solid var(--border);
             display: flex;
@@ -234,47 +175,42 @@
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
             color: var(--primary);
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            margin-bottom: 20px;
         }
 
-        .email-display {
+        .my-email-box {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 16px;
             border-radius: 12px;
             margin-bottom: 20px;
-            word-break: break-all;
         }
 
-        .email-label {
+        .my-email-label {
             font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
             opacity: 0.9;
             margin-bottom: 4px;
         }
 
-        .email-address {
+        .my-email-address {
             font-size: 14px;
             font-weight: 600;
+            word-break: break-all;
         }
 
         .copy-btn {
-            margin-top: 8px;
+            margin-top: 10px;
+            width: 100%;
+            padding: 8px;
             background: rgba(255,255,255,0.2);
             border: none;
             color: white;
-            padding: 6px 12px;
             border-radius: 6px;
-            font-size: 12px;
             cursor: pointer;
-            width: 100%;
+            font-size: 12px;
         }
 
         .compose-btn {
@@ -282,37 +218,27 @@
             color: white;
             border: none;
             padding: 14px;
-            border-radius: 12px;
+            border-radius: 10px;
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            margin-bottom: 20px;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .compose-btn:hover {
-            background: var(--primary-dark);
+            margin-bottom: 16px;
         }
 
         .nav-menu {
             list-style: none;
-            flex: 1;
         }
 
         .nav-item {
-            padding: 12px 16px;
-            border-radius: 10px;
+            padding: 12px;
+            border-radius: 8px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             margin-bottom: 4px;
-            transition: all 0.2s;
             color: var(--text-secondary);
+            transition: all 0.2s;
         }
 
         .nav-item:hover, .nav-item.active {
@@ -344,64 +270,13 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
         }
 
-        .search-box {
-            flex: 1;
-            max-width: 500px;
-            position: relative;
+        .header h2 {
+            font-size: 20px;
         }
 
-        .search-box input {
-            width: 100%;
-            padding: 10px 16px 10px 40px;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            background: var(--bg);
-            color: var(--text);
-            font-size: 14px;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-secondary);
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .icon-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            font-size: 18px;
-        }
-
-        .icon-btn:hover {
-            background: var(--hover);
-        }
-
-        /* Content */
         .content {
-            flex: 1;
-            overflow: hidden;
-            display: flex;
-        }
-
-        .email-list-container {
             flex: 1;
             overflow-y: auto;
             padding: 20px;
@@ -426,28 +301,16 @@
 
         .email-item.unread {
             border-left: 3px solid var(--primary);
-            background: rgba(79, 70, 229, 0.03);
         }
 
-        .email-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .email-sender {
+            font-weight: 600;
+            font-size: 14px;
             margin-bottom: 4px;
         }
 
-        .sender-name {
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .email-item.unread .sender-name {
+        .email-item.unread .email-sender {
             color: var(--primary);
-        }
-
-        .email-time {
-            font-size: 12px;
-            color: var(--text-secondary);
         }
 
         .email-subject {
@@ -462,59 +325,6 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-        }
-
-        /* Reading View */
-        .reading-view {
-            flex: 1;
-            background: var(--surface);
-            border-left: 1px solid var(--border);
-            display: none;
-            flex-direction: column;
-        }
-
-        .reading-view.active {
-            display: flex;
-        }
-
-        .reading-toolbar {
-            padding: 16px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            gap: 8px;
-        }
-
-        .toolbar-btn {
-            padding: 8px 16px;
-            border-radius: 8px;
-            border: none;
-            background: var(--bg);
-            cursor: pointer;
-            font-size: 13px;
-        }
-
-        .reading-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 24px;
-        }
-
-        .reading-subject {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .reading-meta {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .reading-body {
-            line-height: 1.6;
         }
 
         /* Compose Modal */
@@ -557,11 +367,11 @@
             padding: 20px;
         }
 
-        .compose-field {
+        .field {
             margin-bottom: 16px;
         }
 
-        .compose-field label {
+        .field label {
             display: block;
             font-size: 12px;
             font-weight: 600;
@@ -569,8 +379,7 @@
             margin-bottom: 6px;
         }
 
-        .compose-field input,
-        .compose-field textarea {
+        .field input, .field textarea {
             width: 100%;
             padding: 12px;
             border: 1px solid var(--border);
@@ -578,7 +387,7 @@
             font-size: 14px;
         }
 
-        .compose-field textarea {
+        .field textarea {
             min-height: 200px;
             resize: vertical;
         }
@@ -591,48 +400,13 @@
         }
 
         .send-btn {
-            padding: 10px 24px;
+            padding: 12px 24px;
             background: var(--primary);
             color: white;
             border: none;
             border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-        }
-
-        /* Instructions Panel */
-        .instructions {
-            background: var(--bg);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .instructions h3 {
-            margin-bottom: 12px;
-            font-size: 16px;
-        }
-
-        .instructions ol {
-            margin-left: 20px;
-            font-size: 14px;
-            line-height: 1.8;
-            color: var(--text-secondary);
-        }
-
-        .instructions li {
-            margin-bottom: 8px;
-        }
-
-        .code-box {
-            background: var(--dark);
-            color: #10b981;
-            padding: 12px;
-            border-radius: 8px;
-            font-family: monospace;
-            font-size: 12px;
-            margin: 8px 0;
-            word-break: break-all;
         }
 
         /* Toast */
@@ -646,23 +420,11 @@
             border-radius: 8px;
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
             display: none;
-            z-index: 3000;
+            z-index: 2000;
         }
 
         .toast.show {
             display: block;
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                position: fixed;
-                left: -300px;
-                transition: left 0.3s;
-            }
-            
-            .sidebar.open {
-                left: 0;
-            }
         }
     </style>
 </head>
@@ -671,78 +433,32 @@
     <!-- SETUP SCREEN -->
     <div class="setup-screen" id="setupScreen">
         <div class="setup-container">
-            
-            <!-- Step 1: Konfigurasi -->
-            <div class="setup-box" id="step1">
+            <div class="setup-box">
                 <div class="setup-logo">
                     <h1>📧 MailHub</h1>
-                    <p>Email gratis dengan subdomain GitHub</p>
+                    <p>Email client sederhana</p>
                 </div>
 
-                <div class="alert-box">
-                    <strong>⚡ Cara Kerja:</strong>
-                    Gunakan subdomain GitHub Anda sebagai alamat email profesional. Email masuk diteruskan ke Gmail, email keluar dikirim via Gmail SMTP.
-                </div>
-
-                <div class="instructions">
-                    <h3>🚀 Setup Cepat (3 menit):</h3>
-                    <ol>
-                        <li>Buka <strong>forwardemail.net</strong> → Sign Up Free</li>
-                        <li>Masukkan domain: <span id="domainDisplay" class="code-box">yantogoutama9-bit.github.io</span></li>
-                        <li>Verifikasi dengan TXT record (ikuti instruksi ForwardEmail)</li>
-                        <li>Set destination: Gmail Anda</li>
-                        <li>Selesai! Email ke <strong>apaaja@yantogoutama9-bit.github.io</strong> masuk ke Gmail</li>
-                    </ol>
+                <div class="info-box">
+                    <strong>ℹ️ Informasi</strong>
+                    Masukkan username untuk membuat alamat email. Email akan tersimpan di browser Anda (local).
                 </div>
 
                 <div class="form-group">
-                    <label>Username Email (tanpa @domain)</label>
-                    <input type="text" id="emailUser" placeholder="yanto" value="yanto">
-                    <small>Email lengkap: <span id="fullEmail">yanto@yantogoutama9-bit.github.io</span></small>
+                    <label>Username Email</label>
+                    <input type="text" id="usernameInput" placeholder="yanto" value="yanto">
+                    <div class="email-preview" id="emailPreview">yanto@yantogoutama9-bit.github.io</div>
                 </div>
 
                 <div class="form-group">
-                    <label>Gmail Anda (untuk menerima & mengirim)</label>
-                    <input type="email" id="gmailAddress" placeholder="nama@gmail.com">
-                    <small>Email masuk diforward ke Gmail ini</small>
+                    <label>Nama Lengkap</label>
+                    <input type="text" id="nameInput" placeholder="Yanto Goutama">
                 </div>
 
-                <div class="form-group">
-                    <label>Gmail App Password</label>
-                    <input type="password" id="appPassword" placeholder="xxxx xxxx xxxx xxxx">
-                    <small>Buat di: Google Account → Security → App Passwords</small>
-                </div>
-
-                <button class="btn btn-primary" onclick="saveConfig()">
-                    Simpan & Lanjutkan →
+                <button class="btn btn-primary" onclick="startApp()">
+                    Mulai Menggunakan
                 </button>
             </div>
-
-            <!-- Step 2: Test Email -->
-            <div class="setup-box hidden" id="step2">
-                <div class="setup-logo">
-                    <h1>✅ Konfigurasi Tersimpan</h1>
-                </div>
-
-                <div class="alert-box" style="background: #d1fae5; border-color: #10b981; color: #065f46;">
-                    <strong>Email Anda Aktif:</strong>
-                    <div class="code-box" id="displayEmail" style="margin-top: 8px; background: #065f46; color: white;"></div>
-                </div>
-
-                <div class="instructions">
-                    <h3>📋 Instruksi Penggunaan:</h3>
-                    <ol>
-                        <li><strong>Menerima Email:</strong> Semua email ke alamat di atas otomatis masuk ke Gmail Anda</li>
-                        <li><strong>Mengirim Email:</strong> Gunakan form "Tulis Pesan" di aplikasi ini</li>
-                        <li><strong>Reply Email:</strong> Bisa dari Gmail biasa, atau dari aplikasi ini</li>
-                    </ol>
-                </div>
-
-                <button class="btn btn-primary" onclick="enterApp()">
-                    Masuk ke Aplikasi Email
-                </button>
-            </div>
-
         </div>
     </div>
 
@@ -750,13 +466,13 @@
     <div class="app" id="mainApp">
         
         <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar">
+        <aside class="sidebar">
             <div class="logo">📧 MailHub</div>
             
-            <div class="email-display">
-                <div class="email-label">Email Anda</div>
-                <div class="email-address" id="userEmailDisplay">yanto@domain.com</div>
-                <button class="copy-btn" onclick="copyEmail()">📋 Salin Alamat</button>
+            <div class="my-email-box">
+                <div class="my-email-label">Email Anda:</div>
+                <div class="my-email-address" id="displayEmail">-</div>
+                <button class="copy-btn" onclick="copyEmail()">📋 Salin</button>
             </div>
 
             <button class="compose-btn" onclick="openCompose()">
@@ -764,54 +480,26 @@
             </button>
 
             <ul class="nav-menu">
-                <li class="nav-item active" onclick="switchFolder('inbox')">
+                <li class="nav-item active" onclick="showFolder('inbox', this)">
                     📥 Kotak Masuk
-                    <span class="count" id="inboxCount">0</span>
+                    <span class="count" id="inboxBadge">0</span>
                 </li>
-                <li class="nav-item" onclick="switchFolder('sent')">
+                <li class="nav-item" onclick="showFolder('sent', this)">
                     📤 Terkirim
-                </li>
-                <li class="nav-item" onclick="switchFolder('drafts')">
-                    📝 Draf
                 </li>
             </ul>
         </aside>
 
         <!-- Main -->
         <main class="main">
-            <header class="header">
-                <div class="search-box">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" placeholder="Cari email..." id="searchInput">
-                </div>
-                <div class="header-actions">
-                    <button class="icon-btn" onclick="refreshEmails()">🔄</button>
-                    <button class="icon-btn" onclick="logout()">🚪</button>
-                </div>
-            </header>
+            <div class="header">
+                <h2 id="folderTitle">Kotak Masuk</h2>
+                <button onclick="logout()" style="background: none; border: none; cursor: pointer; font-size: 20px;">🚪</button>
+            </div>
 
             <div class="content">
-                <!-- Email List -->
-                <div class="email-list-container" id="listContainer">
-                    <div class="email-list" id="emailList">
-                        <!-- Emails rendered here -->
-                    </div>
-                </div>
-
-                <!-- Reading View -->
-                <div class="reading-view" id="readingView">
-                    <div class="reading-toolbar">
-                        <button class="toolbar-btn" onclick="closeReading()">← Kembali</button>
-                        <button class="toolbar-btn" onclick="replyEmail()">↩️ Balas</button>
-                    </div>
-                    <div class="reading-content">
-                        <h1 class="reading-subject" id="readSubject"></h1>
-                        <div class="reading-meta">
-                            <strong id="readSender"></strong>
-                            <span id="readDate"></span>
-                        </div>
-                        <div class="reading-body" id="readBody"></div>
-                    </div>
+                <div class="email-list" id="emailList">
+                    <!-- Emails here -->
                 </div>
             </div>
         </main>
@@ -821,25 +509,25 @@
     <div class="modal-overlay" id="composeModal">
         <div class="compose-modal">
             <div class="modal-header">
-                <span>Pesan Baru</span>
+                <span>Tulis Pesan Baru</span>
                 <button onclick="closeCompose()" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer;">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="compose-field">
+                <div class="field">
                     <label>Dari</label>
-                    <input type="text" id="fromField" readonly>
+                    <input type="text" id="fromInput" readonly>
                 </div>
-                <div class="compose-field">
+                <div class="field">
                     <label>Kepada</label>
-                    <input type="email" id="toField" placeholder="email@example.com">
+                    <input type="email" id="toInput" placeholder="nama@email.com">
                 </div>
-                <div class="compose-field">
+                <div class="field">
                     <label>Subjek</label>
-                    <input type="text" id="subjectField" placeholder="Subjek email">
+                    <input type="text" id="subjectInput" placeholder="Subjek pesan">
                 </div>
-                <div class="compose-field">
-                    <label>Pesan</label>
-                    <textarea id="bodyField" placeholder="Tulis pesan Anda..."></textarea>
+                <div class="field">
+                    <label>Isi Pesan</label>
+                    <textarea id="bodyInput" placeholder="Tulis pesan Anda di sini..."></textarea>
                 </div>
             </div>
             <div class="modal-footer">
@@ -849,86 +537,64 @@
     </div>
 
     <!-- Toast -->
-    <div class="toast" id="toast"></div>
+    <div class="toast" id="toast">Pesan</div>
 
     <script>
-        // Configuration
-        let config = null;
+        // Data
+        let user = null;
         let emails = [];
         let currentFolder = 'inbox';
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            const saved = localStorage.getItem('mailhub_config');
-            if (saved) {
-                config = JSON.parse(saved);
-                showMainApp();
-            }
-            
-            // Update domain display
+        // Init
+        document.getElementById('usernameInput').addEventListener('input', updatePreview);
+        
+        function updatePreview() {
+            const username = document.getElementById('usernameInput').value || 'username';
             const domain = window.location.hostname;
-            document.getElementById('domainDisplay').textContent = domain;
+            document.getElementById('emailPreview').textContent = `${username}@${domain}`;
+        }
+
+        function startApp() {
+            const username = document.getElementById('usernameInput').value.trim() || 'user';
+            const fullName = document.getElementById('nameInput').value.trim() || username;
+            const domain = window.location.hostname;
             
-            // Update email preview
-            document.getElementById('emailUser').addEventListener('input', (e) => {
-                const user = e.target.value || 'username';
-                document.getElementById('fullEmail').textContent = `${user}@${window.location.hostname}`;
-            });
-        });
-
-        function saveConfig() {
-            const user = document.getElementById('emailUser').value || 'yanto';
-            const gmail = document.getElementById('gmailAddress').value;
-            const password = document.getElementById('appPassword').value;
-
-            if (!gmail || !password) {
-                showToast('Lengkapi semua field!', 'error');
-                return;
-            }
-
-            config = {
-                username: user,
-                domain: window.location.hostname,
-                email: `${user}@${window.location.hostname}`,
-                gmail: gmail,
-                appPassword: password
+            // FIX: Pastikan tidak ada @gmail.com di domain
+            const cleanDomain = domain.replace(/^www\./, '').split(':')[0];
+            
+            user = {
+                username: username,
+                name: fullName,
+                email: `${username}@${cleanDomain}`,
+                domain: cleanDomain
             };
-
-            localStorage.setItem('mailhub_config', JSON.stringify(config));
             
-            document.getElementById('displayEmail').textContent = config.email;
-            document.getElementById('step1').classList.add('hidden');
-            document.getElementById('step2').classList.remove('hidden');
+            localStorage.setItem('mailhub_user', JSON.stringify(user));
+            showApp();
         }
 
-        function enterApp() {
+        function showApp() {
             document.getElementById('setupScreen').classList.add('hidden');
-            showMainApp();
-        }
-
-        function showMainApp() {
             document.getElementById('mainApp').classList.add('active');
-            document.getElementById('userEmailDisplay').textContent = config.email;
-            document.getElementById('fromField').value = config.email;
+            document.getElementById('displayEmail').textContent = user.email;
+            document.getElementById('fromInput').value = user.email;
             
             loadEmails();
-            fetchEmailsFromGmail(); // Simulate fetching
         }
 
-        // Email Functions
         function loadEmails() {
-            const stored = localStorage.getItem(`emails_${config.email}`);
+            const stored = localStorage.getItem(`emails_${user.email}`);
             if (stored) {
                 emails = JSON.parse(stored);
             } else {
-                // Welcome email
+                // Email selamat datang
                 emails = [{
-                    id: 1,
+                    id: Date.now(),
                     from: 'system@mailhub.app',
-                    to: config.email,
-                    senderName: 'MailHub System',
-                    subject: 'Selamat! Email Anda Siap Digunakan 🎉',
-                    body: `Halo ${config.username},\n\nEmail Anda sekarang aktif:\n📧 ${config.email}\n\nCara penggunaan:\n1. Terima Email: Otomatis masuk ke ${config.gmail}\n2. Kirim Email: Gunakan tombol "Tulis Pesan"\n3. Semua email tersimpan di browser ini\n\nSelamat menggunakan!`,
+                    to: user.email,
+                    senderName: 'MailHub',
+                    subject: 'Selamat Datang! 👋',
+                    body: `Halo ${user.name},\n\nEmail Anda adalah:\n${user.email}\n\nIni adalah email client lokal yang menyimpan data di browser Anda.\n\nCara kerja:\n- Kirim email menggunakan tombol "Tulis Pesan"\n- Email akan dibuka di aplikasi email default Anda\n- Data tersimpan di browser ini\n\nSelamat menggunakan!`,
                     date: new Date().toISOString(),
                     read: false,
                     folder: 'inbox'
@@ -939,107 +605,80 @@
         }
 
         function saveEmails() {
-            localStorage.setItem(`emails_${config.email}`, JSON.stringify(emails));
+            localStorage.setItem(`emails_${user.email}`, JSON.stringify(emails));
         }
 
         function renderEmails() {
-            const container = document.getElementById('emailList');
+            const list = document.getElementById('emailList');
             const filtered = emails.filter(e => e.folder === currentFolder);
             
             if (filtered.length === 0) {
-                container.innerHTML = '<div style="padding: 40px; text-align: center; color: var(--text-secondary);">Tidak ada email</div>';
+                list.innerHTML = '<div style="padding: 40px; text-align: center; color: var(--text-secondary);">Tidak ada email</div>';
                 return;
             }
-
-            container.innerHTML = filtered.map(email => `
-                <div class="email-item ${email.read ? '' : 'unread'}" onclick="openEmail(${email.id})">
-                    <div class="email-header">
-                        <span class="sender-name">${email.senderName}</span>
-                        <span class="email-time">${formatDate(email.date)}</span>
-                    </div>
-                    <div class="email-subject">${email.subject}</div>
-                    <div class="email-preview">${email.body.substring(0, 60)}...</div>
+            
+            list.innerHTML = filtered.map(e => `
+                <div class="email-item ${e.read ? '' : 'unread'}" onclick="viewEmail(${e.id})">
+                    <div class="email-sender">${e.senderName}</div>
+                    <div class="email-subject">${e.subject}</div>
+                    <div class="email-preview">${e.body.substring(0, 50)}...</div>
                 </div>
             `).join('');
-
-            // Update count
+            
+            // Update badge
             const unread = emails.filter(e => e.folder === 'inbox' && !e.read).length;
-            document.getElementById('inboxCount').textContent = unread;
+            document.getElementById('inboxBadge').textContent = unread;
         }
 
-        function openEmail(id) {
+        function viewEmail(id) {
             const email = emails.find(e => e.id === id);
-            if (!email) return;
+            if (email) {
+                email.read = true;
+                saveEmails();
+                renderEmails();
+                alert(`Dari: ${email.senderName}\nSubjek: ${email.subject}\n\n${email.body}`);
+            }
+        }
 
-            email.read = true;
-            saveEmails();
-
-            document.getElementById('listContainer').style.display = 'none';
-            document.getElementById('readingView').classList.add('active');
-            document.getElementById('readSubject').textContent = email.subject;
-            document.getElementById('readSender').textContent = `${email.senderName} <${email.from}>`;
-            document.getElementById('readDate').textContent = new Date(email.date).toLocaleString();
-            document.getElementById('readBody').innerHTML = email.body.replace(/\n/g, '<br>');
-            
+        function showFolder(folder, el) {
+            currentFolder = folder;
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            el.classList.add('active');
+            document.getElementById('folderTitle').textContent = folder === 'inbox' ? 'Kotak Masuk' : 'Terkirim';
             renderEmails();
         }
 
-        function closeReading() {
-            document.getElementById('readingView').classList.remove('active');
-            document.getElementById('listContainer').style.display = 'block';
-        }
-
-        // Compose & Send
         function openCompose() {
             document.getElementById('composeModal').classList.add('active');
         }
 
         function closeCompose() {
             document.getElementById('composeModal').classList.remove('active');
+            document.getElementById('toInput').value = '';
+            document.getElementById('subjectInput').value = '';
+            document.getElementById('bodyInput').value = '';
         }
 
-        async function sendEmail() {
-            const to = document.getElementById('toField').value;
-            const subject = document.getElementById('subjectField').value;
-            const body = document.getElementById('bodyField').value;
-
+        function sendEmail() {
+            const to = document.getElementById('toInput').value;
+            const subject = document.getElementById('subjectInput').value;
+            const body = document.getElementById('bodyInput').value;
+            
             if (!to || !subject || !body) {
                 showToast('Lengkapi semua field!');
                 return;
             }
-
-            // METHOD 1: Using mailto (fallback)
-            const mailtoLink = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}&from=${encodeURIComponent(config.email)}`;
             
-            // METHOD 2: Using FormSubmit (free email service)
-            try {
-                const formData = new FormData();
-                formData.append('_replyto', config.email);
-                formData.append('email', config.email);
-                formData.append('to', to);
-                formData.append('subject', subject);
-                formData.append('message', body);
-                formData.append('_subject', `New email from ${config.email}`);
-
-                // Using formspree or similar service
-                await fetch('https://formsubmit.co/ajax/' + to, {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                showToast('Email terkirim!');
-            } catch (e) {
-                // Fallback to mailto
-                window.open(mailtoLink, '_blank');
-                showToast('Membuka aplikasi email...');
-            }
-
-            // Save to sent
+            // Buka mailto
+            const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.open(mailto, '_blank');
+            
+            // Simpan ke sent
             emails.unshift({
                 id: Date.now(),
-                from: config.email,
+                from: user.email,
                 to: to,
-                senderName: config.username,
+                senderName: user.name,
                 subject: subject,
                 body: body,
                 date: new Date().toISOString(),
@@ -1049,62 +688,34 @@
             saveEmails();
             
             closeCompose();
+            showToast('Email dibuka di aplikasi mail Anda');
+            
             if (currentFolder === 'sent') renderEmails();
         }
 
-        function replyEmail() {
-            const subject = document.getElementById('readSubject').textContent;
-            openCompose();
-            document.getElementById('subjectField').value = 'Re: ' + subject;
-        }
-
-        function switchFolder(folder) {
-            currentFolder = folder;
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-            event.target.classList.add('active');
-            renderEmails();
-        }
-
-        function fetchEmailsFromGmail() {
-            // In real implementation, this would use Gmail API
-            // For now, we simulate by checking localStorage periodically
-            showToast('Sinkronisasi dengan Gmail...');
-        }
-
-        function refreshEmails() {
-            showToast('Memperbarui inbox...');
-            setTimeout(() => {
-                renderEmails();
-                showToast('Inbox diperbarui!');
-            }, 1000);
-        }
-
         function copyEmail() {
-            navigator.clipboard.writeText(config.email);
+            navigator.clipboard.writeText(user.email);
             showToast('Email disalin!');
         }
 
         function logout() {
-            localStorage.removeItem('mailhub_config');
+            localStorage.removeItem('mailhub_user');
             location.reload();
         }
 
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'short' });
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
         }
 
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
+        // Check existing session
+        const saved = localStorage.getItem('mailhub_user');
+        if (saved) {
+            user = JSON.parse(saved);
+            showApp();
         }
-
-        // Close modal on outside click
-        document.getElementById('composeModal').addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) closeCompose();
-        });
     </script>
 
 </body>
