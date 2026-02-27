@@ -1,0 +1,9 @@
+{
+  "name": "Master ERP (Offline)",
+  "short_name": "Master ERP",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#063d2b",
+  "theme_color": "#0bb56a",
+  "icons": []
+}
